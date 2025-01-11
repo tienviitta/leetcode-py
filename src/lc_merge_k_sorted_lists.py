@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from utils import ListNode, from_list, to_list
+from utils import ListNode, linked_list_from_list, linked_list_to_list
 from typing import List, Optional
 
 
@@ -65,9 +65,9 @@ def test_ex1():
     lists = [[1, 4, 5], [1, 3, 4], [2, 6]]
     linkedLists = []
     for lst in lists:
-        linkedLists.append(from_list(lst))
+        linkedLists.append(linked_list_from_list(lst))
     resLinkedList = sol.mergeKLists(linkedLists)
-    resList = to_list(resLinkedList)
+    resList = linked_list_to_list(resLinkedList)
     assert resList == [1, 1, 2, 3, 4, 4, 5, 6]
 
 
@@ -92,9 +92,9 @@ def test_ex2():
     ]
     linkedLists = []
     for lst in lists:
-        linkedLists.append(from_list(lst))
+        linkedLists.append(linked_list_from_list(lst))
     resLinkedList = sol.mergeKLists(linkedLists)
-    resList = to_list(resLinkedList)
+    resList = linked_list_to_list(resLinkedList)
     # fmt: off
     assert resList == [
         -10, -8, -8, -8, -6, -6, -6, -5, -4, -4, -3, -3, -3, 
@@ -119,9 +119,9 @@ def test_ex3():
     lists = [[1, 4, 5], [1, 3, 4], [2, 6]]
     linkedLists = []
     for lst in lists:
-        linkedLists.append(from_list(lst))
+        linkedLists.append(linked_list_from_list(lst))
     resLinkedList = sol.mergeKListsPq(linkedLists)
-    resList = to_list(resLinkedList)
+    resList = linked_list_to_list(resLinkedList)
     assert resList == [1, 1, 2, 3, 4, 4, 5, 6]
 
 

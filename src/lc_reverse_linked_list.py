@@ -1,4 +1,4 @@
-from utils import ListNode, from_list, to_list
+from utils import ListNode, linked_list_from_list, linked_list_to_list
 from typing import Optional
 
 
@@ -22,9 +22,9 @@ def test_ex1():
     sol = Solution()
     # head = ListNode(1, ListNode(2, ListNode(3)))
     inp = [1, 2, 3, 4, 5]
-    head = from_list(inp)
+    head = linked_list_from_list(inp)
     res = sol.reverseList(head)
-    out = to_list(res)
+    out = linked_list_to_list(res)
     assert out == inp[::-1]
 
 
