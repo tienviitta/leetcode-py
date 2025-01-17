@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List, Optional
 
 
@@ -33,20 +34,21 @@ class TreeNode:
 
 
 def bst_from_list(lst: List[int]) -> Optional[TreeNode]:
-    # root = TreeNode(lst[0])
-    # for val in lst[1:]:
-    #     bst_insert(root, val)
-    # return root
     if not lst:
         return None
-    root = TreeNode(lst.pop())
-    bst(root, lst)
+    it = iter(lst)
+    root = TreeNode(next(it))
+    q = [root]
+    for node in q:
+        val = next(it, None)
+        if val is not None:
+            node.left = TreeNode(val)
+            q.append(node.left)
+        val = next(it, None)
+        if val is not None:
+            node.right = TreeNode(val)
+            q.append(node.right)
     return root
-
-
-def bst(root, lst):
-    while lst:
-        pass
 
 
 def bst_insert(root: Optional[TreeNode], val) -> Optional[TreeNode]:
@@ -64,8 +66,8 @@ def bst_insert(root: Optional[TreeNode], val) -> Optional[TreeNode]:
 def bst_to_list(root: Optional[TreeNode]) -> List[int]:
     lst = []
     # bst_inorder(root, lst)
-    # bst_preorder(root, lst)
-    bst_postorder(root, lst)
+    bst_preorder(root, lst)
+    # bst_postorder(root, lst)
     return lst
 
 
@@ -91,3 +93,23 @@ def bst_postorder(root: Optional[TreeNode], lst: List[int]):
     bst_postorder(root.left, lst)
     bst_postorder(root.right, lst)
     lst.append(root.val)
+
+
+def bst_bfs(root: Optional[TreeNode]) -> List[int]:
+    lst = []
+    queue = deque()
+    if root:
+        queue.append(root)
+    # level = 0
+    while len(queue) > 0:
+        # print("level: ", level)
+        for i in range(len(queue)):
+            curr = queue.popleft()
+            # print(curr.val)
+            lst.append(curr.val)
+            if curr.left:
+                queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
+        # level += 1
+    return lst
