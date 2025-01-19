@@ -36,7 +36,7 @@ def test_ex2():
     """
     sol = Solution()
     root = bst_from_list([1, 2, 3, 4, 5, None, 8, None, None, 6, 7, 9])
-    tmp = bst_to_list(root)
+    _ = bst_to_list(root)
     res = sol.inorderTraversal(root)
     ref = [4, 2, 6, 5, 7, 1, 3, 9, 8]
     assert res == ref, "res: {}, ref: {}".format(res, ref)
