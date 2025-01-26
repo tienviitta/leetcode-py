@@ -1,27 +1,26 @@
-from collections import deque
+from collections import OrderedDict
 
 
 class LRUCache:
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.cache = {}
-        self.lru = deque()
+        self.cache = OrderedDict()
 
     def get(self, key: int) -> int:
-        if key in self.cache:
-            self.lru.remove(key)
-            self.lru.append(key)
-            return self.cache[key]
-        else:
+        if key not in self.cache:
             return -1
+        else:
+            self.cache.move_to_end(key, last=True)
+            return self.cache[key]
 
     def put(self, key: int, value: int) -> None:
-        if len(self.cache) == self.capacity:
-            rem = self.lru.popleft()
-            self.cache.pop(rem)
-        self.lru.append(key)
-        self.cache[key] = value
-        return None
+        if key in self.cache:
+            self.cache[key] = value
+            self.cache.move_to_end(key, last=True)
+        else:
+            if len(self.cache) == self.capacity:
+                self.cache.popitem(last=False)
+            self.cache[key] = value
 
 
 def test_ex1():
